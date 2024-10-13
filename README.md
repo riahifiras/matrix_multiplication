@@ -26,14 +26,36 @@ Make sure you have the following installed before running the project:
 ### Step 1: Compile the C++ Script
 Before running the application, compile the C++ script:
 
-```cpp
+```bash
+cd scripts
 g++ -o main main.cpp
 ```
 
 ### Step 2: Run the Python Application
-Start the desktop application using the following command:
+Start the desktop application using the following commands:
 
-```python
+#### 1. Navigate into the app directory and create a virtual environment
+
+```bash
+cd app
+python3 -m venv venv
+```
+
+#### 2. Activate the virtual environment
+
+```bash
+source ./venv/bin/activate
+```
+
+#### 3. Install dependencies
+
+```bash
+pip install matplotlib customtkinter
+```
+
+#### 4. Run the app
+
+```bash
 python3 app.py
 ```
 

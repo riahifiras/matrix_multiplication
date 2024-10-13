@@ -65,7 +65,7 @@ class MyApp(ctk.CTk):
             for conf in range(6):
                 for i in range(iterations):
                     print(f"Running C++ script for {number_of_matrices} matrices of size {size}")
-                    self.execute_command(f"./main -s {size} -i {number_of_matrices} -c {conf}")
+                    self.execute_command(f"../scripts/main -s {size} -i {number_of_matrices} -c {conf}")
                     size *= 2
                 size = 2
 
@@ -73,7 +73,7 @@ class MyApp(ctk.CTk):
             for conf in range(6):
                 for i in range(iterations):
                     print(f"Running Java script for {number_of_matrices} matrices of size {size}")
-                    self.execute_command(f"java main.java -s {size} -i {number_of_matrices} -c {conf}")
+                    self.execute_command(f"java ../scripts/main.java -s {size} -i {number_of_matrices} -c {conf}")
                     size *= 2
                 size = 2
 
@@ -81,7 +81,7 @@ class MyApp(ctk.CTk):
             for conf in range(6):
                 for i in range(iterations):
                     print(f"Running Python script for {number_of_matrices} matrices of size {size}")
-                    self.execute_command(f"python3 main.py -s {size} -i {number_of_matrices} -c {conf}")
+                    self.execute_command(f"python3 ../scripts/main.py -s {size} -i {number_of_matrices} -c {conf}")
                     size *= 2
                 size = 2
 
