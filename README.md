@@ -14,6 +14,13 @@ The project currently focuses on comparing execution times for different matrix 
 - Implement memory consumption measurement
 - Add parallel programming algorithms to leverage multi-core CPU architectures
 
+## Dependencies
+
+Make sure you have the following installed before running the project:
+- **Python 3.x**
+- **g++** (for compiling C++ code)
+- **Java JDK** (for Java execution)
+
 ## Usage
 
 ### Step 1: Compile the C++ Script
@@ -37,3 +44,16 @@ In the desktop UI, you can:
 3. Define the number of iterations for matrix multiplication. For example, if you choose 10, the program will multiply two matrices 10 times and calculate the total execution time for those 10 operations.
 
 The application will then run the selected configurations and display the execution times for analysis.
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute, please follow these steps:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -m 'Add a new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
