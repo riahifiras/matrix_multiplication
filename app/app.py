@@ -1,6 +1,7 @@
 import customtkinter as ctk
 import os
 from matplotlib import pyplot as plt
+from tkinter import messagebox  
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
@@ -89,7 +90,13 @@ class MyApp(ctk.CTk):
         os.system(command) 
 
     def on_plot(self):
-        with open("output.txt", 'r') as f:
+        output_file = "../data/output.txt"
+
+        if not os.path.exists(output_file):
+            messagebox.showinfo("Info", "Please run the Calculate command first.")
+            return
+
+        with open(output_file, 'r') as f:
             content = f.readlines()
 
         config_map = {
@@ -121,7 +128,6 @@ class MyApp(ctk.CTk):
                 elif language == "Java":
                     data[config]['Java'][0].append(x_value)
                     data[config]['Java'][1].append(y_value)
-
 
         fig, axes = plt.subplots(2, 3, figsize=(15, 10))
         axes = axes.flatten()
