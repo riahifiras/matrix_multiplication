@@ -138,7 +138,7 @@ public class MatrixMultiplication {
     }
 
     public static void multiplication(List<List<List<Integer>>> matrices, int size) {
-        try (PrintWriter outputFile = new PrintWriter(new FileWriter("output.txt", true))) {
+        try (PrintWriter outputFile = new PrintWriter(new FileWriter("../data/output.txt", true))) {
             long startTime = System.nanoTime();
 
             long initialMemory = calculateMemoryUsage(matrices);

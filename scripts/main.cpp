@@ -183,7 +183,7 @@ vector<vector<long>> multiplyy(const vector<vector<int>> &a, const vector<vector
 
 void multiplication(const vector<vector<vector<int>>> &matrices, int size)
 {
-    ofstream outputFile("output.txt", ios::app);
+    ofstream outputFile("../data/output.txt", ios::app);
 
     auto start = chrono::high_resolution_clock::now();
 

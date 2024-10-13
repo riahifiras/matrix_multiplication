@@ -7,7 +7,7 @@ configuration = 0
 
 def time_decorator(func):
     def wrapper(*args, **kwargs):
-        with open("output.txt", 'a') as f:
+        with open("../data/output.txt", 'a') as f:
             start_time = time.time()  
             result = func(*args, **kwargs) 
             end_time = time.time()  
