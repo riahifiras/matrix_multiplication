@@ -17,34 +17,20 @@ public class MatrixMultiplication {
         }
     }
 
-    public static List<List<List<Integer>>> parseFile(int size, int totalMatrices) {
-        List<Integer> numbers = new ArrayList<>();
-        String line;
-
-        try (BufferedReader inputFile = new BufferedReader(new FileReader("data.txt"))) {
-            while ((line = inputFile.readLine()) != null) {
-                String[] tokens = line.trim().split("\\s+");
-                for (String token : tokens) {
-                    numbers.add(Integer.parseInt(token));
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Unable to open file data.txt");
-            e.printStackTrace();
-        }
-
+    public static List<List<List<Integer>>> generateMatrices(int size, int totalMatrices) {
+        Random random = new Random();
         List<List<List<Integer>>> matrices = new ArrayList<>();
 
         for (int i = 0; i < totalMatrices; i++) {
             List<List<Integer>> matrix = new ArrayList<>();
-            for (int j = 0; j < Math.pow(size, 2); j += size) {
-                List<Integer> v = new ArrayList<>();
+            for (int j = 0; j < size; j++) {
+                List<Integer> row = new ArrayList<>();
                 for (int k = 0; k < size; k++) {
-                    v.add(numbers.get(j + k));
+                    row.add(random.nextInt()); 
                 }
-                matrix.add(v);
+                matrix.add(row); 
             }
-            matrices.add(matrix);
+            matrices.add(matrix); 
         }
 
         return matrices;
@@ -196,7 +182,7 @@ public class MatrixMultiplication {
             System.exit(1);
         }
 
-        List<List<List<Integer>>> matrices = parseFile(size, totalMatrices);
+        List<List<List<Integer>>> matrices = generateMatrices(size, totalMatrices);
         multiplication(matrices, size);
     }
 }

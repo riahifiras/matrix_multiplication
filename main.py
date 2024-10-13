@@ -1,3 +1,4 @@
+import random
 import time
 import sys
 import os
@@ -23,17 +24,16 @@ def get_memory_usage():
     return os.getpid() 
 
 
-def parse_file(size, total_matrices):
-    with open("data.txt", 'r') as f:
-        content = f.read()
-        number_list = [int(i) for i in content.split()]
+def generate_matrices(size, total_matrices):
     matrices = []
+    
     for _ in range(total_matrices):
         matrix = []
-        for i in range(0, size**2, size):
-            l = [number_list[j] for j in range(i, i + size)]
-            matrix.append(l)
+        for _ in range(size):
+            row = [random.randint(-2147483648, 2147483647) for _ in range(size)] 
+            matrix.append(row)
         matrices.append(matrix)
+    
     return matrices
 
 
@@ -126,7 +126,7 @@ def main():
         elif sys.argv[i] == '-c':
             configuration = int(sys.argv[i + 1])  
             
-    matrices = parse_file(size, total_matrices)
+    matrices = generate_matrices(size, total_matrices)
     multiplication(matrices)
 
 

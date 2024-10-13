@@ -3,7 +3,9 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
+#include <random>
 #include <chrono>
+#include <iomanip>
 
 using namespace std;
 
@@ -26,48 +28,28 @@ void print3DVector(const vector<vector<vector<int>>> &vec)
     }
 }
 
-vector<vector<vector<int>>> parse_file(int size, int total_matrices)
+vector<vector<vector<int>>> generate_matrices(int size, int total_matrices)
 {
-    ifstream inputFile("data.txt");
-
-    if (!inputFile)
-    {
-        cerr << "Unable to open file data.txt";
-        return {};
-    }
-
-    vector<int> numbers;
-    string line;
-
-    while (getline(inputFile, line))
-    {
-        stringstream ss(line);
-        int number;
-
-        while (ss >> number)
-        {
-            numbers.push_back(number);
-        }
-    }
+    random_device rd; 
+    mt19937 gen(rd()); 
+    uniform_int_distribution<int> dis(-2147483648, 2147483647); 
 
     vector<vector<vector<int>>> matrices;
 
     for (int i = 0; i < total_matrices; i++)
     {
         vector<vector<int>> matrix;
-        for (int j = 0; j < pow(size, 2); j += size)
+        for (int j = 0; j < size; j++)
         {
-            vector<int> v;
+            vector<int> row;
             for (int k = 0; k < size; k++)
             {
-                v.push_back(numbers[j + k]);
+                row.push_back(dis(gen));
             }
-            matrix.push_back(v);
+            matrix.push_back(row); 
         }
-        matrices.push_back(matrix);
+        matrices.push_back(matrix); 
     }
-
-    inputFile.close();
     return matrices;
 }
 
@@ -213,16 +195,18 @@ void multiplication(const vector<vector<vector<int>>> &matrices, int size)
     }
 
     auto end = chrono::high_resolution_clock::now();
-    chrono::duration<double> duration = end - start;
+
+    auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start);
+    double seconds = static_cast<double>(duration.count()) * 1e-9; 
 
     size_t final_memory = calculateMemoryUsage(matrices);
 
     outputFile << "C++," << to_string(matrices[0][0].size()) << ","
-               << to_string(duration.count()) << ","
+               << scientific << setprecision(6) << seconds << "," 
                << to_string(final_memory - initial_memory) << "," 
                << to_string(configuration) << endl;
 
-    cout << "Multiplication took " << duration.count() << " seconds." << endl;
+    cout << "Multiplication took " << scientific << setprecision(6) << seconds << " seconds." << endl;
     outputFile.close();
 }
 
@@ -259,7 +243,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    vector<vector<vector<int>>> matrices = parse_file(size, total_matrices);
+    vector<vector<vector<int>>> matrices = generate_matrices(size, total_matrices);
     multiplication(matrices, size);
     return 0;
 }
